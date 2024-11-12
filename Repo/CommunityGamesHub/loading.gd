@@ -2,7 +2,7 @@ extends Control
 
 # HTTPRequest node instance
 var http: HTTPRequest
-
+var urls = []
 # Download function
 func download(link: String) -> void:
 	http = HTTPRequest.new()
@@ -25,20 +25,26 @@ func _http_request_completed(result: int, _response_code: int, _headers: Array, 
 	# Initialize XMLParser to parse the downloaded content
 	var parser = XMLParser.new()
 	parser.open_buffer(_body)
-	
+	var st = false
 	# Store all URLs in an array
-	var urls = []
+
 	
 	# Parse the XML content
 	while parser.read() != ERR_FILE_EOF:
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
 			var node_name = parser.get_node_name()
-			
-			# Check if the node is a 'url' element and capture its content
-			if node_name == "url":
-				parser.read()  # Move to the text node inside <url>
-				if parser.get_node_type() == XMLParser.NODE_TEXT:
-					urls.append(parser.get_node_data())
+			if node_name == "gameHub":
+				st = true
+			elif st:
+				if node_name == "url":
+					parser.read()  # Move to the text node inside <url>
+					if parser.get_node_type() == XMLParser.NODE_TEXT:
+						urls.append(parser.get_node_data())
+			else:
+				print(parser.get_node_data())
+	if st:
+		for i in urls:
+			download(i)
 	
 	# Print all collected URLs
 	print("Collected URLs:", urls)
@@ -49,3 +55,4 @@ func _http_request_completed(result: int, _response_code: int, _headers: Array, 
 # Called when the node enters the scene tree
 func _ready() -> void:
 	download("https://raw.githubusercontent.com/GodotCommunityGamesOrg/Community-Game-Hub/refs/heads/main/Games/Log.xml")
+	
