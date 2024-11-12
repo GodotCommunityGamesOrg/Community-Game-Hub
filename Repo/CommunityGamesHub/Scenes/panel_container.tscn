@@ -14,11 +14,8 @@ size = Vector2(84, 41)
 
 [node name="PanelContainer" type="PanelContainer"]
 clip_children = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(300, 200)
+offset_right = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qdk2h")
 script = ExtResource("1_3nlri")
 
@@ -34,6 +31,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("PlaceholderTexture2D_2y0l1")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
@@ -41,4 +40,5 @@ size_flags_vertical = 3
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "[b][u]Title[/u][/b]
-[code]descripton[/code]"
+[code]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.[/code]"
+scroll_active = false
