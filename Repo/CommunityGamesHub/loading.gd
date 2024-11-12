@@ -48,4 +48,4 @@ func _http_request_completed(result: int, _response_code: int, _headers: Array, 
 
 # Called when the node enters the scene tree
 func _ready() -> void:
-	download("https://raw.githubusercontent.com/GodotCommunityGamesOrg/Community-Game-Hub/bf88573b43334226d3585b43f9f3afd797582762/Games/Log.xml")
+	download("https://raw.githubusercontent.com/GodotCommunityGamesOrg/Community-Game-Hub/refs/heads/main/Games/Log.xml")
