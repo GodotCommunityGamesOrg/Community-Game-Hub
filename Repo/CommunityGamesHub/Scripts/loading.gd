@@ -4,6 +4,7 @@ extends Control
 @export_file("*.tscn") var next_scene: String
 @export var anim: AnimationPlayer
 @export var timer: Timer
+@export var texture_r: TextureRect
 var http: HTTPRequest
 var urls = []
 var games: Array[Global.Game] = []
@@ -112,8 +113,9 @@ func _on_image_request_completed(result: int, _response_code: int, _headers: Arr
 		return
 
 	# Save the image data to the game dictionary
-	var image = Image.new()
-	image.load_jpg_from_buffer(_body)  # Load image from downloaded byte data
+	var im = Image.new()
+	im.load_jpg_from_buffer(_body)
+	var image:ImageTexture = ImageTexture.create_from_image(im)  # Load image from downloaded byte data
 	games[current_game_index].image_data = image  # Store image in the game dictionary
 
 	# Proceed to the next game XML download

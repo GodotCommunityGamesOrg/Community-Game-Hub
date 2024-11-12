@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://4r0tt2eoow1p"]
+[gd_scene load_steps=6 format=3 uid="uid://4r0tt2eoow1p"]
 
 [ext_resource type="Script" path="res://Scenes/Hub.gd" id="1_g5g26"]
 [ext_resource type="PackedScene" uid="uid://qb8g42llhwq6" path="res://Scenes/panel_container.tscn" id="2_a5bdd"]
+[ext_resource type="Shader" path="res://Scenes/fade.gdshader" id="3_od4as"]
+[ext_resource type="Texture2D" uid="uid://bq1euigrqva66" path="res://Assets/icon.svg" id="4_6y8hp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_etei5"]
+shader = ExtResource("3_od4as")
+shader_parameter/radius = 0.5
 
 [node name="Control" type="Control" node_paths=PackedStringArray("grid")]
 layout_mode = 3
@@ -14,6 +20,18 @@ script = ExtResource("1_g5g26")
 grid = NodePath("ScrollContainer/GridContainer")
 container = ExtResource("2_a5bdd")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_etei5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_6y8hp")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -25,7 +43,6 @@ horizontal_scroll_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 columns = 5
-
-[node name="PanelContainer" parent="ScrollContainer/GridContainer" instance=ExtResource("2_a5bdd")]
-layout_mode = 2

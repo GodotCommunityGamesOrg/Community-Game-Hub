@@ -12,7 +12,7 @@ func change_scene(path: String):
 class Game:
 	var title: String
 	var img: String
-	var image_data: Image
+	var image_data: Texture
 	var description: String
 	var game_url: String
 	var version: String

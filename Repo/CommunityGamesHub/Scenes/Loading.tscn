@@ -106,7 +106,7 @@ _data = {
 "start": SubResource("Animation_p1a2l")
 }
 
-[node name="Control" type="Control" node_paths=PackedStringArray("anim", "timer")]
+[node name="Control" type="Control" node_paths=PackedStringArray("anim", "timer", "texture_r")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
@@ -118,6 +118,7 @@ script = ExtResource("1_sxvdn")
 next_scene = "res://Scenes/control.tscn"
 anim = NodePath("AnimationPlayer")
 timer = NodePath("Timer")
+texture_r = NodePath("PanelContainer/TextureRect")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
