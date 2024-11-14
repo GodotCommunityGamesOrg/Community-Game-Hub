@@ -1,5 +1,9 @@
 extends PanelContainer
 class_name GameCard
+## GameCard: A UI component representing an individual game card in the game grid.
+##           Displays basic game information such as title, image, and description,
+##           and provides a button to either install or launch the game.
+
 # --- Exported Properties ---
 @export var texturerect: TextureRect  ## Display area for the game's image
 @export var richtext: RichTextLabel  ## Label to show the game's description

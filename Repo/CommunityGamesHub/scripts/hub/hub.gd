@@ -1,5 +1,8 @@
 extends Control
 class_name Hub
+## Hub: A UI container that manages the main navigation buttons and panels.
+##       It displays different sections of the interface (e.g., game details, settings) 
+##       and handles user input to switch between these sections.
 # --- Exported Properties ---
 @export var grid: FlowContainer  ## Container for displaying the game's list
 @export var game_card: PackedScene  ## Scene to instantiate for each game

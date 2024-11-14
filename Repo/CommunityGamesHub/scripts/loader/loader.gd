@@ -1,5 +1,7 @@
 extends Control
 class_name Loader
+## Loader: A class responsible for downloading game data, including the game files and images, from a provided link.
+##         It manages the download progress, handles HTTP requests, and launches the game once it's installed.
 # --- Exported Properties ---
 @export_file("*.tscn") var next_scene: String ## The path to the next scene to switch to.
 @export var anim: AnimationPlayer ## AnimationPlayer to handle animations.
@@ -14,7 +16,7 @@ var done: bool ## Indicates if all downloads and processing are complete.
 
 # --- Private Properties ---
 var _http: HTTPRequest # HTTPRequest instance for handling HTTP requests.
-var urls = [] # Stores URLs collected from the GameHub XML file.
+var _urls = [] # Stores URLs collected from the GameHub XML file.
 
 # --- Signals ---
 # (None in this example)
@@ -35,12 +37,12 @@ func download_gamehub(link: String) -> void:
 	if request != OK:
 		push_error("HTTP request error: %d" % request)
 
-## Callback when the GameHub XML request is completed
-## Parses the GameHub XML to collect URLs of each game's XML file.
-## [param result]: The result code of the HTTP request.
-## [param _response_code]: The HTTP response code.
-## [param _headers]: The headers of the HTTP response.
-## [param _body]: The body of the HTTP response as PackedByteArray.
+# Callback when the GameHub XML request is completed
+# Parses the GameHub XML to collect URLs of each game's XML file.
+# [param result]: The result code of the HTTP request.
+# [param _response_code]: The HTTP response code.
+# [param _headers]: The headers of the HTTP response.
+# [param _body]: The body of the HTTP response as PackedByteArray.
 func _on_gamehub_request_completed(result: int, _response_code: int, _headers: Array, _body: PackedByteArray) -> void:
 	_http.queue_free()
 	if result != OK:
@@ -53,10 +55,10 @@ func _on_gamehub_request_completed(result: int, _response_code: int, _headers: A
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT and parser.get_node_name() == "url":
 			parser.read()
 			if parser.get_node_type() == XMLParser.NODE_TEXT:
-				urls.append(parser.get_node_data())
+				_urls.append(parser.get_node_data())
 	
-	if urls.size() > 0:
-		download_game_xml(urls[current_url_index]) # Start with the first URL
+	if _urls.size() > 0:
+		download_game_xml(_urls[current_url_index]) # Start with the first URL
 
 ## Function to start downloading each game's XML
 ## [param link]: The URL to the game's XML file.
@@ -68,12 +70,12 @@ func download_game_xml(link: String) -> void:
 	if request != OK:
 		push_error("HTTP request error: %d" % request)
 
-## Callback when a game XML request is completed
-## Parses each game's XML content and creates a Game object.
-## [param result]: The result code of the HTTP request.
-## [param _response_code]: The HTTP response code.
-## [param _headers]: The headers of the HTTP response.
-## [param _body]: The body of the HTTP response as PackedByteArray.
+# Callback when a game XML request is completed
+# Parses each game's XML content and creates a Game object.
+# [param result]: The result code of the HTTP request.
+# [param _response_code]: The HTTP response code.
+# [param _headers]: The headers of the HTTP response.
+# [param _body]: The body of the HTTP response as PackedByteArray.
 func _on_game_request_completed(result: int, _response_code: int, _headers: Array, _body: PackedByteArray) -> void:
 	_http.queue_free()
 	if result != OK:
@@ -122,12 +124,12 @@ func download_game_image(img_url: String) -> void:
 	if request != OK:
 		push_error("Image HTTP request error: %d" % request)
 
-## Callback when the image download request is completed
-## Loads the image from the downloaded byte data and stores it in the game object.
-## [param result]: The result code of the HTTP request.
-## [param _response_code]: The HTTP response code.
-## [param _headers]: The headers of the HTTP response.
-## [param _body]: The body of the HTTP response as PackedByteArray.
+# Callback when the image download request is completed
+# Loads the image from the downloaded byte data and stores it in the game object.
+# [param result]: The result code of the HTTP request.
+# [param _response_code]: The HTTP response code.
+# [param _headers]: The headers of the HTTP response.
+# [param _body]: The body of the HTTP response as PackedByteArray.
 func _on_image_request_completed(result: int, _response_code: int, _headers: Array, _body: PackedByteArray) -> void:
 	_http.queue_free()
 	if result != OK:
@@ -140,8 +142,8 @@ func _on_image_request_completed(result: int, _response_code: int, _headers: Arr
 	games[current_game_index].image_data = image
 
 	current_url_index += 1
-	if current_url_index < urls.size():
-		download_game_xml(urls[current_url_index])
+	if current_url_index < _urls.size():
+		download_game_xml(_urls[current_url_index])
 	else:
 		check_done()
 
