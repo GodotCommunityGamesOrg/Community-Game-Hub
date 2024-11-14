@@ -1,18 +1,17 @@
 [gd_scene load_steps=12 format=3 uid="uid://bdq62edaa0his"]
 
-[ext_resource type="Script" path="res://Scripts/loading.gd" id="1_sxvdn"]
-[ext_resource type="Shader" path="res://Scripts/Loading.gdshader" id="2_uhpht"]
-[ext_resource type="Texture2D" uid="uid://bq1euigrqva66" path="res://Assets/icon.svg" id="3_hvg6x"]
-[ext_resource type="Shader" path="res://Scripts/Chain.gdshader" id="4_o1bsw"]
-[ext_resource type="Texture2D" uid="uid://coptb24qn4cct" path="res://Assets/Logo.svg" id="5_fyg8s"]
+[ext_resource type="Script" path="res://scripts/loader/loader.gd" id="1_8sek3"]
+[ext_resource type="Shader" path="res://scripts/shader/fader.gdshader" id="2_exiwf"]
+[ext_resource type="Texture2D" uid="uid://bq1euigrqva66" path="res://assets/icon.svg" id="3_6vmih"]
+[ext_resource type="Shader" path="res://scripts/shader/chain.gdshader" id="4_xxcn4"]
+[ext_resource type="Texture2D" uid="uid://coptb24qn4cct" path="res://assets/jinx_studio_logo.svg" id="5_4iia2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l4086"]
-shader = ExtResource("2_uhpht")
+shader = ExtResource("2_exiwf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7v3h"]
-shader = ExtResource("4_o1bsw")
-shader_parameter/frag = 0.0
-shader_parameter/radius = 0.0
+shader = ExtResource("4_xxcn4")
+shader_parameter/radius = 1.0
 
 [sub_resource type="Animation" id="Animation_re3hq"]
 length = 0.001
@@ -26,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -38,7 +37,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_w718u"]
@@ -107,15 +106,14 @@ _data = {
 }
 
 [node name="Control" type="Control" node_paths=PackedStringArray("anim", "timer", "texture_r")]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_sxvdn")
-next_scene = "res://Scenes/control.tscn"
+script = ExtResource("1_8sek3")
+next_scene = "res://scenes/hub/hub.tscn"
 anim = NodePath("AnimationPlayer")
 timer = NodePath("Timer")
 texture_r = NodePath("PanelContainer/TextureRect")
@@ -131,7 +129,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
 material = SubResource("ShaderMaterial_l4086")
 layout_mode = 2
-texture = ExtResource("3_hvg6x")
+texture = ExtResource("3_6vmih")
 expand_mode = 1
 stretch_mode = 5
 
@@ -196,7 +194,7 @@ text = "in collaberation with:"
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("5_fyg8s")
+texture = ExtResource("5_4iia2")
 expand_mode = 4
 stretch_mode = 5
 

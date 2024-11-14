@@ -16,4 +16,4 @@ func _http_request_completed(result, _response_code, _headers, _body):
 	print("Ready")
 
 func _ready():
-	download("https://github.com/Aronthata/Arch-Assault/raw/main/Arch-Assault_Runner.exe", "Logo.exe")
+	download("", "Logo.exe")

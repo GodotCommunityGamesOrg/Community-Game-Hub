@@ -1,0 +1,15 @@
+# --- Class ---
+
+# --- Exported Properties ---
+
+# --- Public Properties ---
+
+# --- Private Properties ---
+
+# --- Enum ---
+
+# --- Signals ---
+
+# --- Built-in Callbacks ---
+
+# --- Custom Methods ---

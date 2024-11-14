@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://qb8g42llhwq6"]
 
-[ext_resource type="Script" path="res://Scenes/container.gd" id="1_3nlri"]
+[ext_resource type="Script" path="res://scripts/hub/game_card.gd" id="1_2m7ey"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdk2h"]
 corner_radius_top_left = 54
@@ -19,7 +19,7 @@ clip_children = 2
 custom_minimum_size = Vector2(300, 200)
 offset_right = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qdk2h")
-script = ExtResource("1_3nlri")
+script = ExtResource("1_2m7ey")
 texturerect = NodePath("VBoxContainer/TextureRect")
 richtext = NodePath("VBoxContainer/MarginContainer/RichTextLabel")
 install = NodePath("VBoxContainer/Control/Button")
