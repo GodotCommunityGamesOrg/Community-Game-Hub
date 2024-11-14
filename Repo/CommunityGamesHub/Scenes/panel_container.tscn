@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://qb8g42llhwq6"]
+[gd_scene load_steps=5 format=3 uid="uid://qb8g42llhwq6"]
 
 [ext_resource type="Script" path="res://Scenes/container.gd" id="1_3nlri"]
 
@@ -12,17 +12,20 @@ corner_detail = 18
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2y0l1"]
 size = Vector2(84, 41)
 
-[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("texturerect", "richtext")]
-clip_children = 1
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58tpb"]
+
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("texturerect", "richtext", "install", "progress_bar")]
+clip_children = 2
 custom_minimum_size = Vector2(300, 200)
 offset_right = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qdk2h")
 script = ExtResource("1_3nlri")
 texturerect = NodePath("VBoxContainer/TextureRect")
 richtext = NodePath("VBoxContainer/MarginContainer/RichTextLabel")
+install = NodePath("VBoxContainer/Control/Button")
+progress_bar = NodePath("VBoxContainer/Control/ProgressBar")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 2
 color = Color(0.252028, 0.252028, 0.252028, 1)
 
@@ -30,6 +33,7 @@ color = Color(0.252028, 0.252028, 0.252028, 1)
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 84)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("PlaceholderTexture2D_2y0l1")
@@ -50,4 +54,34 @@ theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "[b][u]Title[/u][/b]
 [code]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.[/code]"
+fit_content = true
 scroll_active = false
+
+[node name="Control" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="VBoxContainer/Control"]
+visible = false
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_58tpb")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_58tpb")
+text = "install"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Control"]
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/Control/Button" to="." method="_on_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://4r0tt2eoow1p"]
+[gd_scene load_steps=9 format=3 uid="uid://4r0tt2eoow1p"]
 
 [ext_resource type="Script" path="res://Scenes/Hub.gd" id="1_g5g26"]
 [ext_resource type="PackedScene" uid="uid://qb8g42llhwq6" path="res://Scenes/panel_container.tscn" id="2_a5bdd"]
@@ -7,9 +7,24 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etei5"]
 shader = ExtResource("3_od4as")
-shader_parameter/radius = 0.5
+shader_parameter/radius = 0.48
 
-[node name="Control" type="Control" node_paths=PackedStringArray("grid")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kog6a"]
+bg_color = Color(1, 1, 1, 0.564706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqwsn"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+corner_detail = 1
+expand_margin_right = 5.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muc24"]
+bg_color = Color(1, 1, 1, 1)
+corner_detail = 1
+expand_margin_right = 4.0
+anti_aliasing = false
+
+[node name="Control" type="Control" node_paths=PackedStringArray("grid", "hub", "panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,8 +32,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g5g26")
-grid = NodePath("ScrollContainer/GridContainer")
+grid = NodePath("HBoxContainer/ScrollContainer/Control/GridContainer")
 container = ExtResource("2_a5bdd")
+hub = NodePath("HBoxContainer/PanelContainer/HBoxContainer/CenterContainer")
+panel = NodePath("HBoxContainer/ScrollContainer/Control")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_etei5")
@@ -32,17 +49,71 @@ texture = ExtResource("4_6y8hp")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_kog6a")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/PanelContainer/HBoxContainer/CenterContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_mqwsn")
+toggle_mode = true
+button_pressed = true
+text = "Games"
+
+[node name="Button2" type="Button" parent="HBoxContainer/PanelContainer/HBoxContainer/CenterContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_muc24")
+toggle_mode = true
+text = "Installed"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
 horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+[node name="Control" type="Control" parent="HBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 5
+
+[node name="GridContainer" type="FlowContainer" parent="HBoxContainer/ScrollContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

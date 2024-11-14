@@ -1,6 +1,5 @@
 extends Control
 
-# HTTPRequest node instance
 @export_file("*.tscn") var next_scene: String
 @export var anim: AnimationPlayer
 @export var timer: Timer
@@ -114,7 +113,7 @@ func _on_image_request_completed(result: int, _response_code: int, _headers: Arr
 
 	# Save the image data to the game dictionary
 	var im = Image.new()
-	im.load_jpg_from_buffer(_body)
+	im.load_webp_from_buffer(_body)
 	var image:ImageTexture = ImageTexture.create_from_image(im)  # Load image from downloaded byte data
 	games[current_game_index].image_data = image  # Store image in the game dictionary
 
@@ -124,6 +123,7 @@ func _on_image_request_completed(result: int, _response_code: int, _headers: Arr
 		download_game_xml(urls[current_url_index])
 	else:
 		check_done()
+
 func end():
 	Global.games = games
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
