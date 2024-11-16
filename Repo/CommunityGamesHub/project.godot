@@ -30,6 +30,10 @@ window/size/viewport_width=800
 window/size/viewport_height=450
 window/size/borderless=true
 
+[dotnet]
+
+project/assembly_name="Community Games Hub"
+
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true

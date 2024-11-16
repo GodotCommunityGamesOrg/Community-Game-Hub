@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://scripts/shader/fader.gdshader" id="2_exiwf"]
 [ext_resource type="Texture2D" uid="uid://bq1euigrqva66" path="res://assets/icon.svg" id="3_6vmih"]
 [ext_resource type="Shader" path="res://scripts/shader/chain.gdshader" id="4_xxcn4"]
-[ext_resource type="Texture2D" uid="uid://coptb24qn4cct" path="res://assets/jinx_studio_logo.svg" id="5_4iia2"]
+[ext_resource type="Texture2D" uid="uid://coptb24qn4cct" path="res://assets/jinx_studio_logo_TM.svg" id="5_4iia2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l4086"]
 shader = ExtResource("2_exiwf")
@@ -200,7 +200,7 @@ stretch_mode = 5
 
 [node name="Label2" type="Label" parent="AspectRatioContainer/VBoxContainer"]
 layout_mode = 2
-text = "Jinx Studios"
+text = "Jinx Studios TM"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
